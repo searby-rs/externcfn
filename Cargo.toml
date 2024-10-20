@@ -1,0 +1,11 @@
+[package]
+name = "externcfn"
+description = "macro_rules for define correct extern 'C' functions with an normal syntax"
+authors = ["searby-rs <searbyrs@outlook.com>"]
+license = "MIT"
+repository = "https://github.com/searby-rs/externcfn"
+homepage = "https://github.com/searby-rs/externcfn"
+version = "1.0.0"
+edition = "2021"
+
+[dependencies]
