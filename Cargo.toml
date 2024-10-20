@@ -5,7 +5,7 @@ authors = ["searby-rs <searbyrs@outlook.com>"]
 license = "MIT"
 repository = "https://github.com/searby-rs/externcfn"
 homepage = "https://github.com/searby-rs/externcfn"
-version = "1.0.1"
+version = "1.0.2"
 edition = "2021"
 
 [workspace]
@@ -28,5 +28,5 @@ crate-type = ["cdylib", "rlib", "staticlib"]
 externcfn-attr = { version = "1.0.1", path = "externcfn-attr", optional = true }
 
 [features]
-externcfn-attr = ["dep:externcfn-attr"]
-default = ["externcfn-attr"]
+attr = ["dep:externcfn-attr"]
+default = ["attr"]
