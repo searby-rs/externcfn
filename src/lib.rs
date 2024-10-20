@@ -4,6 +4,9 @@
 //!
 //!
 
+#[macro_use]
+extern crate externcfn_attr;
+
 #[macro_export]
 macro_rules! externcfn {
     // Einzelne reguläre Funktion mit Attributen
@@ -54,3 +57,5 @@ macro_rules! externcfn {
         externcfn! { $(#[$meta])* $v const unsafe fn $name($($args)*) $(-> $ret)? $body }
     )*};
 }
+
+pub use externcfn_attr::externcfnattr;

@@ -8,7 +8,25 @@ homepage = "https://github.com/searby-rs/externcfn"
 version = "1.0.1"
 edition = "2021"
 
+[workspace]
+resolver = "2"
+members = ["externcfn-attr"]
+
+[workspace.package]
+description = "macro_rules for define correct extern 'C' functions with an normal syntax"
+authors = ["searby-rs <searbyrs@outlook.com>"]
+license = "MIT"
+repository = "https://github.com/searby-rs/externcfn"
+homepage = "https://github.com/searby-rs/externcfn"
+version = "1.0.1"
+edition = "2021"
+
 [lib]
 crate-type = ["cdylib", "rlib", "staticlib"]
 
 [dependencies]
+externcfn-attr = { version = "1.0.1", path = "externcfn-attr", optional = true }
+
+[features]
+externcfn-attr = ["dep:externcfn-attr"]
+default = ["externcfn-attr"]
