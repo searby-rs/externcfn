@@ -8,6 +8,9 @@ homepage.workspace = true
 version.workspace = true
 edition.workspace = true
 
+[lib]
+proc-macro = true
+
 [dependencies]
 proc-macro2 = "1.0.88"
 quote = "1.0.37"
