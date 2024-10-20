@@ -7,26 +7,50 @@
 #[macro_export]
 macro_rules! externcfn {
     // Einzelne reguläre Funktion mit Attributen
-    ($(#[$meta:meta])* $v:vis $(unsafe)? fn $name:ident($($args:tt)*) $(-> $ret:ty)? $body:block) => {
+    ($(#[$meta:meta])* $v:vis fn $name:ident($($args:tt)*) $(-> $ret:ty)? $body:block) => {
         $(#[$meta])*
         #[no_mangle]
-        $v $(unsafe)? extern "C" fn $name($($args)*) $(-> $ret)? $body
+        $v extern "C" fn $name($($args)*) $(-> $ret)? $body
+    };
+
+    // Einzelne reguläre unsafe Funktion mit.Attributen
+    ($(#[$meta:meta])* $v:vis unsafe fn $name:ident($($args:tt)*) $(-> $ret:ty)? $body:block) => {
+        $(#[$meta])*
+        #[no_mangle]
+        $v unsafe extern "C" fn $name($($args)*) $(-> $ret)? $body
     };
 
     // Einzelne konstante Funktion mit Attributen
-    ($(#[$meta:meta])* $v:vis $(unsafe)? const fn $name:ident($($args:tt)*) $(-> $ret:ty)? $body:block) => {
+    ($(#[$meta:meta])* $v:vis const fn $name:ident($($args:tt)*) $(-> $ret:ty)? $body:block) => {
         $(#[$meta])*
         #[no_mangle]
-        $v $(unsafe)? const extern "C" fn $name($($args)*) $(-> $ret)? $body
+        $v const extern "C" fn $name($($args)*) $(-> $ret)? $body
+    };
+
+    // Einzelne konstante unsafe Funktion mit.Attributen
+    ($(#[$meta:meta])* $v:vis const unsafe fn $name:ident($($args:tt)*) $(-> $ret:ty)? $body:block) => {
+        $(#[$meta])*
+        #[no_mangle]
+        $v const unsafe extern "C" fn $name($($args)*) $(-> $ret)? $body
     };
 
     // Batch-Definitionen für reguläre Funktionen mit Attributen
-    ($($(#[$meta:meta])* $v:vis $(unsafe)? fn $name:ident($($args:tt)*) $(-> $ret:ty)? $body:block)*) => {$(
-        externcfn! { $(#[$meta])* $v $(unsafe)? fn $name($($args)*) $(-> $ret)? $body }
+    ($($(#[$meta:meta])* $v:vis fn $name:ident($($args:tt)*) $(-> $ret:ty)? $body:block)*) => {$(
+        externcfn! { $(#[$meta])* $v fn $name($($args)*) $(-> $ret)? $body }
+    )*};
+
+    // Batch-Definitionen für reguläre Funktionen mit Attributen
+    ($($(#[$meta:meta])* $v:vis unsafe fn $name:ident($($args:tt)*) $(-> $ret:ty)? $body:block)*) => {$(
+        externcfn! { $(#[$meta])* $v unsafe fn $name($($args)*) $(-> $ret)? $body }
     )*};
 
     // Batch-Definitionen für konstante Funktionen mit Attributen
-    ($($(#[$meta:meta])* $v:vis $(unsafe)? const fn $name:ident($($args:tt)*) $(-> $ret:ty)? $body:block)*) => {$(
-        externcfn! { $(#[$meta])* $v $(unsafe)? const fn $name($($args)*) $(-> $ret)? $body }
+    ($($(#[$meta:meta])* $v:vis const fn $name:ident($($args:tt)*) $(-> $ret:ty)? $body:block)*) => {$(
+        externcfn! { $(#[$meta])* $v const fn $name($($args)*) $(-> $ret)? $body }
+    )*};
+
+    // Batch-Definitionen für konstante Funktionen mit Attributen
+    ($($(#[$meta:meta])* $v:vis const unsafe fn $name:ident($($args:tt)*) $(-> $ret:ty)? $body:block)*) => {$(
+        externcfn! { $(#[$meta])* $v const unsafe fn $name($($args)*) $(-> $ret)? $body }
     )*};
 }
